@@ -1,0 +1,2 @@
+Add-Migration MeterReadings -P DatabaseLibrary -C MeterMonitoringContext -S MeterMonitoring
+Update-Database -p DatabaseLibrary -Context MeterMonitoringContext -s MeterMonitoring

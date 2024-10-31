@@ -1,33 +1,43 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DatabaseLibrary.Data;
+using Microsoft.AspNetCore.Mvc;
+using MeterMonitoring.Data.Services.Abstractions;
+using MeterMonitoring.Library.Dtos;
 
 namespace MeterMonitoring.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class MeterController : ControllerBase
+    public class MeterController : BaseController
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<MeterController> _logger;
+        private readonly IMeterService service;
+        private readonly ILogger<MeterController> logger;
+        private readonly MeterMonitoringContext context;
 
-        public MeterController(ILogger<MeterController> logger)
+        public MeterController(ILogger<MeterController> logger, MeterMonitoringContext context, IMeterService service)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.context = context;
+            this.service = service;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("meter-list-by-serial/{serialNumber}")]
+        public async Task<IActionResult> GetMeterList([FromRoute] string serialNumber, CancellationToken cancellationToken)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var result = await service.GetMeterListBySerialNumber(serialNumber, cancellationToken);
+            return ApiResult(result);
         }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> AddMeterReading([FromBody] AddMeterDto data, CancellationToken cancellationToken)
+        {
+            var result = await service.Add(data, cancellationToken);
+            return ApiResult(result);
+        }
+
     }
 }
