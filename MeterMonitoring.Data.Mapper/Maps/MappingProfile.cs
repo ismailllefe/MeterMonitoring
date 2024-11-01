@@ -14,6 +14,7 @@ namespace MeterMonitoring.Data.Mapper.Maps
         public MappingProfile()
         {
             CreateMap<AddMeterDto, MeterData>();
+            CreateMap<NewClientRequestDto, ClientRequest>();
         }
 
     }

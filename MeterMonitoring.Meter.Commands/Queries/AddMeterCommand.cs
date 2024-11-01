@@ -28,7 +28,6 @@ public class AddMeterCommand : IRequestHandler<AddMeterRequest, ApiResult<bool>>
         {
             return new ApiResult<bool>(false, state: State.Warning);
         }
-        rabbitMQService.Publish("Request", request.Data);
 
         var entity = mapper.Map<MeterData>(request.Data);
 

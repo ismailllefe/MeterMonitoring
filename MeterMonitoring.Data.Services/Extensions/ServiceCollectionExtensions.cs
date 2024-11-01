@@ -10,7 +10,8 @@ namespace MeterMonitoring.Data.Services.Extensions
         public static IServiceCollection AddProjectServices(this IServiceCollection services)
         {
             SetupMediatR(services);
-            services.AddScoped<IMeterService, MeterService>(); 
+            services.AddScoped<IMeterService, MeterService>();
+            services.AddScoped<IReportService, ReportService>();
             return services;
         }
         private static void SetupMediatR(IServiceCollection services)
