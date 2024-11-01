@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "help", "help", "{978FB76F-A53B-48A1-B4B1-6A537824E4A9}"
 	ProjectSection(SolutionItems) = preProject
 		Migration.txt = Migration.txt
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9BB83557-01F3-427D-B625-D2AA20B4C5D3}"
@@ -39,6 +40,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterMonitoring.RabbitMQ", "MeterMonitoring.Common.Services\MeterMonitoring.RabbitMQ.csproj", "{6A298BFB-51D5-45A3-B240-EC359D75DE75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterMonitoring.Data.Mapper", "MeterMonitoring.Data.Mapper\MeterMonitoring.Data.Mapper.csproj", "{F253DABB-8920-496C-88B3-EB5FBA216163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterMonitoring.Rabbit.Consumer", "MeterMonitoring.Rabbit.Consumer\MeterMonitoring.Rabbit.Consumer.csproj", "{305EC275-63D3-4583-83EB-48499D2DB300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +81,10 @@ Global
 		{F253DABB-8920-496C-88B3-EB5FBA216163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F253DABB-8920-496C-88B3-EB5FBA216163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F253DABB-8920-496C-88B3-EB5FBA216163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305EC275-63D3-4583-83EB-48499D2DB300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305EC275-63D3-4583-83EB-48499D2DB300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305EC275-63D3-4583-83EB-48499D2DB300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305EC275-63D3-4583-83EB-48499D2DB300}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,6 +105,7 @@ Global
 		{8E7A59B2-7766-4DB2-B28E-51C0AD095405} = {A3E57255-0135-4537-95B1-7F5D894A5D17}
 		{6A298BFB-51D5-45A3-B240-EC359D75DE75} = {8E7A59B2-7766-4DB2-B28E-51C0AD095405}
 		{F253DABB-8920-496C-88B3-EB5FBA216163} = {A3E57255-0135-4537-95B1-7F5D894A5D17}
+		{305EC275-63D3-4583-83EB-48499D2DB300} = {C380C7D3-2207-4A81-BA71-89EECA194B6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {609C7046-0CAE-4C3D-A0A7-63396D8F0DD5}

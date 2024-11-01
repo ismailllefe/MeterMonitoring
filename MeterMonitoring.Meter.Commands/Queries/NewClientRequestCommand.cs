@@ -11,7 +11,7 @@ namespace MeterMonitoring.Meter.Commands.Queries
 {
     public class NewClientRequestCommand : IRequestHandler<NewClientRequestRequest, ApiResult<NewClientResult>>
     {
-        private readonly MeterMonitoringContext context;
+        private MeterMonitoringContext context;
         private readonly IMapper mapper;
         private readonly RabbitMqService rabbitMqService;
 

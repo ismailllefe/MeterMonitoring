@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using MeterMonitoring.Data.Services.Extensions;
 using MeterMonitoring.Data.Mapper.Extensions;
 using MeterMonitoring.Common.Services.Concretes;
+using MeterMonitoring.Rabbit.Consumer.Managers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,7 +22,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMappers();
 builder.Services.AddSingleton<RabbitMqService>();
-
+//builder.Services.AddHostedService<RequestConsumerManager>();
+var builders = Host.CreateDefaultBuilder(args);
+builders.ConfigureServices((hostContext, services) =>
+{
+    // RabbitMQConsumer'ý arka plan servisi olarak ekle
+    services.AddHostedService<RequestConsumerManager>();
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -28,7 +28,7 @@ namespace MeterMonitoring.Common.Services.Concretes
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
 
-            _channel.QueueDeclare(queue: "MeterQueue",
+            _channel.QueueDeclare(queue: "Request",
                                   durable: false,
                                   exclusive: false,
                                   autoDelete: false,

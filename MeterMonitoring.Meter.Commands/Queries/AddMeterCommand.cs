@@ -11,7 +11,7 @@ namespace MeterMonitoring.Meter.Commands.Queries;
 
 public class AddMeterCommand : IRequestHandler<AddMeterRequest, ApiResult<bool>>
 {
-    private readonly MeterMonitoringContext context;
+    private MeterMonitoringContext context;
     private readonly IMapper mapper;
     private readonly RabbitMqService rabbitMQService;
 
@@ -28,7 +28,7 @@ public class AddMeterCommand : IRequestHandler<AddMeterRequest, ApiResult<bool>>
         {
             return new ApiResult<bool>(false, state: State.Warning);
         }
-        rabbitMQService.Publish("MeterQueue", request.Data);
+        rabbitMQService.Publish("Request", request.Data);
 
         var entity = mapper.Map<MeterData>(request.Data);
 

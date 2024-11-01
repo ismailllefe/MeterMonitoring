@@ -21,6 +21,7 @@
     <ProjectReference Include="..\MeterMonitoring.Data.Services\MeterMonitoring.Data.Services.csproj" />
     <ProjectReference Include="..\MeterMonitoring.Entities\DatabaseLibrary.csproj" />
     <ProjectReference Include="..\MeterMonitoring.Library\MeterMonitoring.Library.csproj" />
+    <ProjectReference Include="..\MeterMonitoring.Rabbit.Consumer\MeterMonitoring.Rabbit.Consumer.csproj" />
   </ItemGroup>
 
 </Project>
