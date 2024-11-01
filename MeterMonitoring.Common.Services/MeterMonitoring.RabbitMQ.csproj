@@ -14,4 +14,9 @@
     <Folder Include="Abstractions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MeterMonitoring.Entities\DatabaseLibrary.csproj" />
+    <ProjectReference Include="..\MeterMonitoring.Library\MeterMonitoring.Library.csproj" />
+  </ItemGroup>
+
 </Project>

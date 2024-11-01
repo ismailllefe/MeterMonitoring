@@ -9,19 +9,12 @@ namespace MeterMonitoring.Controllers
     [Route("[controller]")]
     public class MeterController : BaseController
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly IMeterService service;
         private readonly ILogger<MeterController> logger;
-        private readonly MeterMonitoringContext context;
 
-        public MeterController(ILogger<MeterController> logger, MeterMonitoringContext context, IMeterService service)
+        public MeterController(ILogger<MeterController> logger, IMeterService service)
         {
             this.logger = logger;
-            this.context = context;
             this.service = service;
         }
 

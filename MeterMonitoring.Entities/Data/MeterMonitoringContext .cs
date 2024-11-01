@@ -10,13 +10,6 @@ namespace DatabaseLibrary.Data
 
         public DbSet<MeterData> Meters { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Meter>().HasKey(m => m.Id); 
-        //    modelBuilder.Entity<Meter>()
-        //                .Property(m => m.SerialNumber)
-        //                .HasMaxLength(8) 
-        //                .IsRequired();
-        //}
+        public DbSet<ClientRequest> ClientRequests { get; set; }
     }
 }

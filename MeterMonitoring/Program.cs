@@ -2,6 +2,7 @@ using DatabaseLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using MeterMonitoring.Data.Services.Extensions;
 using MeterMonitoring.Data.Mapper.Extensions;
+using MeterMonitoring.Common.Services.Concretes;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMappers();
+builder.Services.AddSingleton<RabbitMqService>();
 
 var app = builder.Build();
 
