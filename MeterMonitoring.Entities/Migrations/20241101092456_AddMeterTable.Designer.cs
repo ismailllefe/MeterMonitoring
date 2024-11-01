@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DatabaseLibrary.Migrations
 {
     [DbContext(typeof(MeterMonitoringContext))]
-    [Migration("20241031210734_AddMeterTable")]
+    [Migration("20241101092456_AddMeterTable")]
     partial class AddMeterTable
     {
         /// <inheritdoc />
@@ -24,6 +24,23 @@ namespace DatabaseLibrary.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("DatabaseLibrary.Models.ClientRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset?>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("RequestState")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClientRequests", "Main");
+                });
 
             modelBuilder.Entity("DatabaseLibrary.Models.MeterData", b =>
                 {

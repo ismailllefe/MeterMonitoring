@@ -22,6 +22,23 @@ namespace DatabaseLibrary.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("DatabaseLibrary.Models.ClientRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset?>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("RequestState")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClientRequests", "Main");
+                });
+
             modelBuilder.Entity("DatabaseLibrary.Models.MeterData", b =>
                 {
                     b.Property<Guid>("Id")

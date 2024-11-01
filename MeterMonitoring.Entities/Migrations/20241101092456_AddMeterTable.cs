@@ -15,6 +15,20 @@ namespace DatabaseLibrary.Migrations
                 name: "Main");
 
             migrationBuilder.CreateTable(
+                name: "ClientRequests",
+                schema: "Main",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    RequestState = table.Column<int>(type: "integer", nullable: false),
+                    Date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientRequests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MeterDatas",
                 schema: "Main",
                 columns: table => new
@@ -35,6 +49,10 @@ namespace DatabaseLibrary.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ClientRequests",
+                schema: "Main");
+
             migrationBuilder.DropTable(
                 name: "MeterDatas",
                 schema: "Main");
