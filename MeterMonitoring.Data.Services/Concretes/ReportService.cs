@@ -29,7 +29,7 @@ namespace MeterMonitoring.Data.Services.Concretes
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<bool>> GetReport(Guid id, CancellationToken cancellationToken)
+        public Task<ApiResult<object>> GetReport(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

@@ -15,5 +15,7 @@ namespace MeterMonitoring.Library.Dtos
 
         [MaxLength(2048, ErrorMessage = "too_long_text")]
         public string Payload { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }
