@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace MeterMonitoring.Library.Dtos
 {
-    public class RequestListDto
+    public class ReportListDto
     {
-        public RequestState State { get; set; }
-        public string Name { get; set; }
-        public DateTimeOffset? Date { get; set; }
+        public DateTimeOffset? RequestedDate { get; set; }
+        public string Content { get; set; }
     }
 }

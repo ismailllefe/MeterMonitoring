@@ -21,12 +21,12 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMappers();
 builder.Services.AddSingleton<RabbitMqService>();
 
-var builders = Host.CreateDefaultBuilder(args);
-builders.ConfigureServices((hostContext, services) =>
-{
-    // RabbitMQConsumer'ý arka plan servisi olarak ekle
-    services.AddHostedService<RequestConsumerManager>();
-});
+//var builders = Host.CreateDefaultBuilder(args);
+//builders.ConfigureServices((hostContext, services) =>
+//{
+//    // RabbitMQConsumer'ý arka plan servisi olarak ekle
+//    services.AddHostedService<RequestConsumerManager>();
+//});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

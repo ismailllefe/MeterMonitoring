@@ -6,27 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DatabaseLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class AddMeterTable : Migration
+    public partial class MeterReadings : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "Main");
-
-            migrationBuilder.CreateTable(
-                name: "ClientRequests",
-                schema: "Main",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    RequestState = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClientRequests", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "MeterDatas",
@@ -44,17 +30,33 @@ namespace DatabaseLibrary.Migrations
                 {
                     table.PrimaryKey("PK_MeterDatas", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Reports",
+                schema: "Main",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    RequestState = table.Column<int>(type: "integer", nullable: false),
+                    RequestedDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    SerialNumber = table.Column<string>(type: "text", nullable: false),
+                    Content = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reports", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ClientRequests",
+                name: "MeterDatas",
                 schema: "Main");
 
             migrationBuilder.DropTable(
-                name: "MeterDatas",
+                name: "Reports",
                 schema: "Main");
         }
     }

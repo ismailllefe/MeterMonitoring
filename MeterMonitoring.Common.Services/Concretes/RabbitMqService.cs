@@ -1,17 +1,11 @@
-﻿using DatabaseLibrary.Data;
-using MeterMonitoring.Library.Converters;
+﻿using MeterMonitoring.Library.Converters;
 using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace MeterMonitoring.Common.Services.Concretes
 {
-    public class RabbitMqService 
+    public class RabbitMqService
     {
         private readonly IConnection _connection;
         private readonly IModel _channel;
@@ -19,7 +13,7 @@ namespace MeterMonitoring.Common.Services.Concretes
         public RabbitMqService()
         {
             var factory = new ConnectionFactory()
-            { 
+            {
                 HostName = "127.0.0.1",
                 Port = 10001,
                 UserName = "guest",
@@ -35,7 +29,6 @@ namespace MeterMonitoring.Common.Services.Concretes
                                   arguments: null);
         }
 
-
         public void Publish<T>(string routingKey, T data, string exchange = "")
         {
             var jsonData = JsonSerializer.Serialize(data);
@@ -44,6 +37,17 @@ namespace MeterMonitoring.Common.Services.Concretes
             var props = _channel.CreateBasicProperties();
             props.DeliveryMode = 2;
             _channel.BasicPublish(exchange: exchange, routingKey: routingKey, props, body: body);
+        }
+
+        public void PublishMessage(string routingKey, string message)
+        {
+            var body = Encoding.UTF8.GetBytes(message);
+
+            _channel.BasicPublish(exchange: "",
+                                  routingKey: routingKey,
+                                  basicProperties: null,
+                                  body: body);
+
         }
 
         public void Dispose()

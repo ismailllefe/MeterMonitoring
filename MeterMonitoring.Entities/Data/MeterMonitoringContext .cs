@@ -10,6 +10,6 @@ namespace DatabaseLibrary.Data
 
         public DbSet<MeterData> Meters { get; set; }
 
-        public DbSet<ClientRequest> ClientRequests { get; set; }
+        public DbSet<Report> Reports { get; set; }
     }
 }

@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 
 namespace DatabaseLibrary.Models
 {
-    [Table("ClientRequests", Schema = "Main")]
-    public class ClientRequest
+    [Table("Reports", Schema = "Main")]
+    public class Report
     {
         [Required]
         public Guid Id { get; set; } = Guid.NewGuid();
         [Required]
         public RequestState RequestState { get; set; }
 
-        public DateTimeOffset? Date { get; set; }
+        public DateTimeOffset? RequestedDate { get; set; }
+
+        public string SerialNumber { get; set; }
+        public string Content { get; set; }
+
     }
 }

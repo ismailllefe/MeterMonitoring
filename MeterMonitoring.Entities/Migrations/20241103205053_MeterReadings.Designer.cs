@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DatabaseLibrary.Migrations
 {
     [DbContext(typeof(MeterMonitoringContext))]
-    [Migration("20241101092456_AddMeterTable")]
-    partial class AddMeterTable
+    [Migration("20241103205053_MeterReadings")]
+    partial class MeterReadings
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,23 +24,6 @@ namespace DatabaseLibrary.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("DatabaseLibrary.Models.ClientRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset?>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("RequestState")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ClientRequests", "Main");
-                });
 
             modelBuilder.Entity("DatabaseLibrary.Models.MeterData", b =>
                 {
@@ -67,6 +50,31 @@ namespace DatabaseLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MeterDatas", "Main");
+                });
+
+            modelBuilder.Entity("DatabaseLibrary.Models.Report", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RequestState")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("RequestedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("SerialNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reports", "Main");
                 });
 #pragma warning restore 612, 618
         }

@@ -25,5 +25,19 @@ namespace MeterMonitoring.Controllers
             return ApiResult(result);
         }
 
+        [HttpGet("get/{id}")]
+        public async Task<IActionResult> GetReportDetail([FromRoute] Guid id, CancellationToken cancellationToken)
+        {
+            var result = await service.GetReport(id, cancellationToken);
+            return ApiResult(result);
+        }
+
+        [HttpGet("report-list-by-serial/{serialNumber}")]
+        public async Task<IActionResult> GetReportList([FromRoute] string serialNumber, CancellationToken cancellationToken)
+        {
+            var result = await service.GetReportList(serialNumber, cancellationToken);
+            return ApiResult(result);
+        }
+
     }
 }

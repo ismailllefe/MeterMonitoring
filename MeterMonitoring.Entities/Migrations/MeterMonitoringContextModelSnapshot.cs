@@ -22,23 +22,6 @@ namespace DatabaseLibrary.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DatabaseLibrary.Models.ClientRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset?>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("RequestState")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ClientRequests", "Main");
-                });
-
             modelBuilder.Entity("DatabaseLibrary.Models.MeterData", b =>
                 {
                     b.Property<Guid>("Id")
@@ -64,6 +47,31 @@ namespace DatabaseLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MeterDatas", "Main");
+                });
+
+            modelBuilder.Entity("DatabaseLibrary.Models.Report", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RequestState")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("RequestedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("SerialNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reports", "Main");
                 });
 #pragma warning restore 612, 618
         }

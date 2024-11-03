@@ -3,6 +3,7 @@ using MeterMonitoring.Data.Services.Abstractions;
 using MeterMonitoring.Library;
 using MeterMonitoring.Library.Dtos;
 using MeterMonitoring.Meter.Commands.Requests;
+using MeterMonitoring.Meter.Queries.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +25,15 @@ namespace MeterMonitoring.Data.Services.Concretes
             return mediator.Send(new NewClientRequestRequest(dto), cancellationToken);
         }
 
-        public Task<ApiResult<List<RequestListDto>>> GetListByType(ListRequestRequest request, CancellationToken cancellationToken)
+        public Task<ApiResult<List<ReportListDto>>> GetReportList(string serialNumber, CancellationToken cancellationToken)
+        {
+            return mediator.Send(new ReportListBySerialNumberRequest(serialNumber), cancellationToken);
+        }
+
+        public Task<ApiResult<ReportDto>> GetReport(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<object>> GetReport(Guid id, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

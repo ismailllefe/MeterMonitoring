@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using DatabaseLibrary.Data;
+using MeterMonitoring.Rabbit.Consumer.Helpers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Diagnostics.Metrics;
@@ -13,7 +16,9 @@ namespace MeterMonitoring.Rabbit.Consumer.Managers
         private readonly IConnection _connection;
         private readonly IModel _channel;
         private readonly string _queueName = "Request";
-        public RequestConsumerManager()
+        private readonly ReportHelper reportHelper;
+
+        public RequestConsumerManager( ReportHelper reportHelper)
         {
             var factory = new ConnectionFactory()
             {
@@ -31,23 +36,18 @@ namespace MeterMonitoring.Rabbit.Consumer.Managers
                                  autoDelete: false,
                                  arguments: null);
 
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (model, ea) =>
-            {
-                var body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                var meter = JsonSerializer.Deserialize<Meter>(message);
-            };
-
+            this.reportHelper = reportHelper;
         }
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
             var consumer = new EventingBasicConsumer(_channel);
 
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
+                reportHelper.CreateReportContent(message);
+
             };
 
             _channel.BasicConsume(queue: _queueName,
@@ -56,6 +56,7 @@ namespace MeterMonitoring.Rabbit.Consumer.Managers
 
             return Task.CompletedTask;
         }
+
 
         public override void Dispose()
         {
